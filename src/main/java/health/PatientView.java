@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 public final class PatientView extends javax.swing.JFrame {
@@ -391,4 +393,16 @@ public final class PatientView extends javax.swing.JFrame {
   private javax.swing.JButton newButton;
   private javax.swing.JButton openRequest;
   // End of variables declaration
+
+  public JButton getOpenButton() {
+    return openRequest;
+  }
+
+  public JButton getNewButton() {
+    return newButton;
+  }
+
+  public JList getRequestsList() {
+    return jList1;
+  }
 }

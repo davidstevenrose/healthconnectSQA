@@ -3,27 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package health;
 
 import java.awt.Toolkit;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import jdk.nashorn.internal.scripts.JO;
 
 public class NewJFrame extends javax.swing.JFrame {
+
+  private javax.swing.JButton LoginAsDoctor;
+  private javax.swing.JButton LoginAsPatient;
+  private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel3;
+  private javax.swing.JLabel jLabel4;
+  private javax.swing.JSeparator jSeparator1;
+  private javax.swing.JPasswordField txt_password;
+  private javax.swing.JTextField txt_username;
+  private JOptionPane successPane;
+
   Connection conn=null;
   ResultSet rs=null;
   PreparedStatement pst=null;
   int curRow=0;
   private String username;
-  /**
-   * Creates new form NewJFrame
-   */
+
   public NewJFrame() {
     initComponents();
     try {
@@ -39,15 +51,6 @@ public class NewJFrame extends javax.swing.JFrame {
     Dimension size = toolkit.getScreenSize();
     setLocation(size.width/2 - getWidth()/2,
         size.height/2 - getHeight()/2);
-  }
-
-
-  public String getUsername(){
-    return this.username;
-  }
-
-  public void setUsername(String username){
-    this.username = this.txt_username.getText();
   }
 
   /**
@@ -68,6 +71,7 @@ public class NewJFrame extends javax.swing.JFrame {
     txt_password = new javax.swing.JPasswordField();
     jSeparator1 = new javax.swing.JSeparator();
     jLabel4 = new javax.swing.JLabel();
+    successPane = new JOptionPane();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -189,8 +193,10 @@ public class NewJFrame extends javax.swing.JFrame {
         dispose();
       }
       else{
-        JOptionPane.showMessageDialog(null, "Incorrect username or password.  Please try again.");
-
+        //JOptionPane.showMessageDialog(null, "Incorrect username or password.  Please try again.");
+        successPane.setMessage("Incorrect username or password.  Please try again.");
+        JDialog diag = successPane.createDialog(null, "Status");
+        diag.setVisible(true);
       }
     }
 
@@ -205,8 +211,6 @@ public class NewJFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, e);
       }
     }
-
-
   }
 
   private void LoginAsDoctorActionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,8 +231,10 @@ public class NewJFrame extends javax.swing.JFrame {
         dispose();
       }
       else{
-        JOptionPane.showMessageDialog(null, "Incorrect username or password.  Please try again.");
-
+        //JOptionPane.showMessageDialog(null, "Incorrect username or password.  Please try again.");
+        successPane.setMessage("Incorrect username or password.  Please try again.");
+        JDialog diag = successPane.createDialog(null, "Status");
+        diag.setVisible(true);
       }
     }
 
@@ -247,7 +253,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
   }
 
-  private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {
+  public void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {
     // TODO add your handling code here:
   }
 
@@ -255,45 +261,27 @@ public class NewJFrame extends javax.swing.JFrame {
     // TODO add your handling code here:
   }
 
-  /**
-   * @param args the command line arguments
-   */
-  public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-     */
-    try {
-      for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-        if ("Nimbus".equals(info.getName())) {
-          javax.swing.UIManager.setLookAndFeel(info.getClassName());
-          break;
-        }
-      }
-    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-      java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
-
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        new NewJFrame().setVisible(true);
-      }
-    });
+  public String getUsername(){
+    return this.txt_username.getText();
   }
 
-  // Variables declaration - do not modify
-  private javax.swing.JButton LoginAsDoctor;
-  private javax.swing.JButton LoginAsPatient;
-  private javax.swing.JLabel jLabel1;
-  private javax.swing.JLabel jLabel2;
-  private javax.swing.JLabel jLabel3;
-  private javax.swing.JLabel jLabel4;
-  private javax.swing.JSeparator jSeparator1;
-  private javax.swing.JPasswordField txt_password;
-  public javax.swing.JTextField txt_username;
-  // End of variables declaration
+  public void setUsername(String username){
+    this.txt_username.setText(username);
+  }
+
+  public void setPassword(String password){
+    this.txt_password.setText(password);
+  }
+
+  public JButton getLoginAsPatientButton() {
+    return this.LoginAsPatient;
+  }
+
+  public JButton getLoginAsDoctorButton() {
+    return this.LoginAsDoctor;
+  }
+
+  public JOptionPane getSuccessPane() {
+    return this.successPane;
+  }
 }
