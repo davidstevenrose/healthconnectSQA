@@ -41,7 +41,7 @@ public class PatientTests {
     public void setup() {
         patientView = new PatientView("patient");
         patientView.setUserType("Patient");
-        String sql = "insert into Request (RID, PUsername, Date, Status) values (555, patient, 5-5-2000, New);";
+        String sql = "insert into Request (RID, PUsername, Date, Status) values (555, \"patient\", 5-5-2000, \"New\");";
         
         try {
             Statement st = conn.createStatement();
