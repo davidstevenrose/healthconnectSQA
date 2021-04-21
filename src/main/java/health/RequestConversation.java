@@ -266,7 +266,7 @@ public class RequestConversation extends javax.swing.JFrame {
       }
 
       catch(SQLException | HeadlessException e){
-        JOptionPane.showMessageDialog(null, e);
+        JOptionPane.showMessageDialog(null, "We're unable to add your message to the request right now.");
         notifyMsg = e.getMessage();
       }finally{
         try{
