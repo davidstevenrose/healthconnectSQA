@@ -266,7 +266,8 @@ public final class DoctorView extends javax.swing.JFrame {
     viewedRequests.setText("In Progress Requests");
     requestsList.setVisible(true);
     String element;
-    String sql ="select distinct Request.RID, Date, PUsername from Request, Message where Request.RID = Message.RID and Request.Status=? and Message.DUsername=?";
+    //select distinct Request.RID, Date, PUsername from Request inner join Message on Request.RID = Message.RID where Request.Status=? and Message.DUsername=?;
+    String sql ="select distinct Request.RID, Date, PUsername from Request inner join Message on Request.RID = Message.RID where Request.Status=? and Message.DUsername=?";
     model.removeAllElements();
     element = "RID        Date                                        Patient Username";
     model.addElement(element);
