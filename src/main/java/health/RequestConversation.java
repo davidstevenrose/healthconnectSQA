@@ -25,6 +25,7 @@ public class RequestConversation extends javax.swing.JFrame {
   ResultSet rs=null;
   PreparedStatement pst=null;
   String element;
+  String notifyMsg;
   /**
    * Creates new form RequestConversation
    * @param new_requestID
@@ -261,16 +262,20 @@ public class RequestConversation extends javax.swing.JFrame {
         pst.setString(1, userID);
         pst.setString(2, temp);
         pst.execute();
+        notifyMsg = "Are you sure you want to add your message to the request?";
       }
 
       catch(SQLException | HeadlessException e){
-        JOptionPane.showMessageDialog(null, e);}finally{
+        JOptionPane.showMessageDialog(null, e);
+        notifyMsg = e.getMessage();
+      }finally{
         try{
           rs.close();
           pst.close();
         }
         catch(SQLException e){
           JOptionPane.showMessageDialog(null, e);
+          notifyMsg = e.getMessage();
         }
       }
     }
@@ -342,6 +347,10 @@ public class RequestConversation extends javax.swing.JFrame {
       dispose();
     }
   }
+  
+  public String getNotifyMsg(){
+      return notifyMsg;
+  }
 
   /**
    * @param args the command line arguments
@@ -385,4 +394,12 @@ public class RequestConversation extends javax.swing.JFrame {
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JScrollPane jScrollPane2;
   // End of variables declaration
+  
+  public javax.swing.JTextArea getAddToRequestTA(){
+      return addToRequest;
+  }
+  
+  public javax.swing.JButton getAddButton(){
+      return addButton;
+  }
 }
